@@ -20,19 +20,19 @@ sh ./microbitMore/install-stretch3.sh
 # pcratch IoT 拡張のインストール（ビルドはダメヨよ）
 cd /scratch-gui
 git clone https://github.com/jcodeorg/pcratch-iot-ext.git
-cd pcratch-iot-ext
-npm install
-npm run build
-cd /scratch-gui
+# cd pcratch-iot-ext
+# npm install
+# npm run build
+# cd /scratch-gui
 sh ./pcratch-iot-ext/install-stretch3.sh
 # 確認
-cp ./node_modules/scratch-vm/src/extension-support/extension-manager.js /scripts
+# cp ./node_modules/scratch-vm/src/extension-support/extension-manager.js /scripts
 
 # pcratch IoT 拡張のレポジトリ同期
-cd /scratch-gui/pcratch-iot-ext
-git fetch
-git pull
-npm run build
+# cd /scratch-gui/pcratch-iot-ext
+# git fetch
+# git pull
+# npm run build
 
 # scratch-gui のビルド
 cd /scratch-gui
@@ -44,6 +44,9 @@ cd /scratch-gui/build
 http-server -p 8080
 
 
+
+
+#    以下は不要
 cp ./pcratch-iot-ext/dist/pcratchIoT.mjs ./build
 http://localhost:8080/pcratchIoT.mjs
 
