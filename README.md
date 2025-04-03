@@ -29,10 +29,11 @@ sh ./pcratch-iot-ext/install-stretch3.sh
 # cp ./node_modules/scratch-vm/src/extension-support/extension-manager.js /scripts
 
 # pcratch IoT 拡張のレポジトリ同期
-# cd /scratch-gui/pcratch-iot-ext
-# git fetch
-# git pull
-# npm run build
+cd /scratch-gui/pcratch-iot-ext
+git fetch
+git pull
+cp dist/pcratchIoT.mjs /scratch-gui/node_modules/scratch-vm/src/extensions/pcratchIoT/
+ls /scratch-gui/node_modules/scratch-vm/src/extensions/pcratchIoT/
 
 # scratch-gui のビルド
 cd /scratch-gui
