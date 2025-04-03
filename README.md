@@ -17,7 +17,7 @@ cd /scratch-gui
 git clone -b stretch3 --single-branch https://github.com/microbit-more/mbit-more-v2.git ./microbitMore
 sh ./microbitMore/install-stretch3.sh
 
-# pcratch IoT 拡張のインストールとビルド
+# pcratch IoT 拡張のインストール（ビルドはダメヨよ）
 cd /scratch-gui
 git clone https://github.com/jcodeorg/pcratch-iot-ext.git
 cd pcratch-iot-ext
