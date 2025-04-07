@@ -58,6 +58,11 @@ jobs:
       - name: Build Project
         run: NODE_OPTIONS=--openssl-legacy-provider npm run build
 
+      - name: Debug Build Directory
+        run: |
+          echo "Contents of ./build:"
+          ls -la ./build
+
       # GitHub Pages へのデプロイ
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
