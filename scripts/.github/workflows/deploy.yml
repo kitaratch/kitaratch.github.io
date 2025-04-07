@@ -1,0 +1,67 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - "!*"
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      # キャッシュの設定: npm の依存関係をキャッシュ
+      - name: Cache Node Modules
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      # Scratch GUI リポジトリのクローン
+      - name: Checkout Scratch GUI
+        uses: actions/checkout@v4
+        with:
+          repository: LLK/scratch-gui
+          ref: v3.6.18
+
+      # npm install の実行
+      - name: Install Dependencies
+        run: npm install
+
+      # microbitMore リポジトリのクローン
+      - name: Checkout microbitMore
+        uses: actions/checkout@v4
+        with:
+          repository: microbit-more/mbit-more-v2
+          ref: stretch3
+          path: ./microbitMore
+
+      # pcratch IoT 拡張のクローン
+      - name: Checkout pcratch IoT Extension
+        uses: actions/checkout@v4
+        with:
+          repository: jcodeorg/pcratch-iot-ext
+          path: ./pcratch-iot-ext
+
+      # microbitMore のセットアップ
+      - name: Setup microbitMore
+        run: sh ./microbitMore/install-stretch3.sh
+
+      # pcratch IoT 拡張のセットアップ
+      - name: Setup pcratch IoT Extension
+        run: sh ./pcratch-iot-ext/install-stretch3.sh
+
+      # ビルドの実行
+      - name: Build Project
+        run: NODE_OPTIONS=--openssl-legacy-provider npm run build
+
+      # GitHub Pages へのデプロイ
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+          publish_dir: ./build
+          publish_branch: gh-pages
