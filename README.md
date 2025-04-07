@@ -10,6 +10,7 @@ docker exec -it kitaratch-website /bin/bash
 
 script/install.sh を参照の事
 
+``` sh
 # scratch-gui のインストール
 cd /
 git clone --branch v3.6.18 --single-branch https://github.com/LLK/scratch-gui.git
@@ -47,3 +48,4 @@ NODE_OPTIONS=--openssl-legacy-provider npm run build
 # テストサーバーの起動
 cd /scratch-gui/build
 http-server -p 8080
+```
