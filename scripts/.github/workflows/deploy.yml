@@ -58,6 +58,7 @@ jobs:
       - name: Build Project
         run: NODE_OPTIONS=--openssl-legacy-provider npm run build
 
+      # ビルドの確認
       - name: Debug Build Directory
         run: |
           echo "Contents of ./build:"
