@@ -1,13 +1,12 @@
 # kitaratch-website
 
-# ビルドの方法
+# Docker環境でのビルド方法
 docker-compose build
 docker-compose up -d
 docker exec -it kitaratch-website /bin/bash
+script/install.sh
 
-# ビルドの手順
-
-script/install.sh を参照の事
+# ビルドの手順（script/install.sh）
 
 ``` sh
 # scratch-gui のインストール
@@ -48,3 +47,17 @@ NODE_OPTIONS=--openssl-legacy-provider npm run build
 cd /scratch-gui/build
 http-server -p 8080
 ```
+
+# mjs の差し替えアップデートの手順（script/update.sh）
+```sh
+# pcratchIoT.mjs のコピー
+cp /scripts/pcratchIoT.mjs /scratch-gui/node_modules/scratch-vm/src/extensions/pcratchIoT/
+# scratch-gui のビルド
+cd /scratch-gui
+npm cache clean --force  # 必要に応じてキャッシュのクリア
+NODE_OPTIONS=--openssl-legacy-provider npm run build
+# テストサーバーの起動
+cd /scratch-gui/build
+http-server -p 8080
+```
+localhost:8080
