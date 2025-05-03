@@ -1,5 +1,10 @@
 # kitaratch-website
 
+# github でのビルド方法
+
+ソースを変更してプッシュすると、自動的にビルドが行われる。
+
+
 # Docker環境でのビルド方法
 docker-compose build
 docker-compose up -d
