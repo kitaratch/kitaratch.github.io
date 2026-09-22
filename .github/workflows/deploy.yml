@@ -9,6 +9,8 @@ on:
 jobs:
   build-deploy:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
         with:
@@ -123,10 +125,11 @@ jobs:
       - run: sh ./xcx-cameraselector/scripts/stretch3-install.sh
       - run: sh ./scratch2webserialapi/install.sh
       - run: sh ./xcx-gai/scripts/stretch3-install.sh
-      - run: sh ./chatgpt2scratch/install.sh
-        env:
-          AZURE_API_KEY: ${{ secrets.AZURE_API_KEY }}
-          DOJO_KEY: ${{ secrets.DOJO_KEY }}
+      # chatgpt2scratch requires AZURE_API_KEY and DOJO_KEY, which are not configured.
+      # - run: sh ./chatgpt2scratch/install.sh
+      #   env:
+      #     AZURE_API_KEY: ${{ secrets.AZURE_API_KEY }}
+      #     DOJO_KEY: ${{ secrets.DOJO_KEY }}
       - run: sh ./geoscratch/install.sh
       - run: sh ./scratch-lego-bluetooth-extensions/scripts/install.sh duplotrain
       - run: sh ./numberbank/install.sh
@@ -155,7 +158,6 @@ jobs:
       - run: sh ./stretch3/modify_index_html.sh
       - uses: peaceiris/actions-gh-pages@v3
         with:
-          deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./build
           publish_branch: master
-          cname: stretch3.champierre.com
