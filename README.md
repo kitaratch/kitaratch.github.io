@@ -1,3 +1,14 @@
+# kitaratch.github.io（きたらっち）
+
+Stretch3(ストレッチスリー)に以下の拡張を加えた
+
+websock-ext：ネットワーク拡張
+pcratch-iot-ext：PcratchIoT拡張
+
+- run: sh ./websock-ext/install-stretch3.sh
+- run: sh ./pcratch-iot-ext/install-stretch3.sh
+
+
 # Stretch3(ストレッチスリー)
 
 Stretch3(ストレッチスリー)は自作の拡張機能を使えるように改造したScratch(スクラッチ)です。音声認識(スピーチ トゥー スクラッチ)、ポーズの認識(ポーズネット トゥー スクラッチ)、画像や音声を学習させることができる機械学習(エムエル トゥー スクラッチ)、ChatGPT(チャットジーピーティー トゥー スクラッチ)などが使えるいろいろな拡張機能があります。
