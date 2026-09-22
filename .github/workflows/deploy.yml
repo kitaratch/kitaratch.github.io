@@ -5,6 +5,7 @@ on:
       - source
     tags:
       - "!*"
+  workflow_dispatch:
 
 jobs:
   build-deploy:
@@ -119,6 +120,19 @@ jobs:
           repository: yokobond/xcx-gai
           ref: stretch3
           path: ./xcx-gai
+      # ネットワーク拡張のクローン
+      - name: Checkout websock-ext
+        uses: actions/checkout@v4
+        with:
+          repository: kitaratch/websock-ext
+          path: ./websock-ext
+      # pcratch IoT 拡張のクローン
+      - name: Checkout pcratchIoT Extension
+        uses: actions/checkout@v4
+        with:
+          repository: jcodeorg/pcratch-iot-ext
+          path: ./pcratch-iot-ext
+
       - run: sh ./xcx-arduino/scripts/stretch3-install.sh
       - run: sh ./xcx-webapi/scripts/stretch3-install.sh
       - run: sh ./xcx-screenshot/scripts/stretch3-install.sh
@@ -150,6 +164,10 @@ jobs:
       - run: sh ./stretch3/add_ga_tracking_code.sh
       # @peculiar/webcrypto 1.6.0+ が webpack 4 で parse できないため 1.5.0 に固定
       - run: sh ./stretch3/pin-peculiar-webcrypto.sh
+      # added websock-ext & PcratchIoT Extension
+      - run: sh ./websock-ext/install-stretch3.sh
+      - run: sh ./pcratch-iot-ext/install-stretch3.sh
+
       # TODO: ERR_OSSL_EVP_UNSUPPORTED エラーに対処するため、
       # NODE_OPTIONS を設定しているが、いずれは外したい。
       # Ref. https://zenn.dev/yogarasu/articles/425732ff408d06
